@@ -11,18 +11,10 @@ services:
       - '3030:3030'
     volumes:
       - ./src:/app
-    depends_on:
-      db:
-        condition: service_healthy
 
   db:
     image: mongo:latest
     restart: always
-    healthcheck:
-      test: ["CMD-SHELL", "mongo --eval 'db.adminCommand(\"ping\")'"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
     environment:
       MONGO_INITDB_DATABASE: ${DB_NAME}
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
