@@ -21,9 +21,11 @@ app.use(express.json());
 
 const userRoute = require('./routes/userRoute.js');
 const accessoryRoute = require('./routes/accessoryRoute.js');
+const productController = require('./routes/productRoute.js');
 
 userRoute(app);
 accessoryRoute(app);
+productController(app);
 
 app.listen(port, () =>{
     console.log(`Example app listenning on port ${port}`);
