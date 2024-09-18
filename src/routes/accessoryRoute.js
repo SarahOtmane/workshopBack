@@ -1,6 +1,6 @@
 
 module.exports = (server) => {
-    const aessoryController = require('../controllers/acessoryController');
+    const accessoryController = require('../controllers/accessoryController');
 
-    server.post('/accessory', aessoryController.createAnAccessory);
+    server.post('/accessory', accessoryController.createAnAccessory);
 }
