@@ -48,3 +48,17 @@ exports.getAllAccessory = async(req, res) =>{
         res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
     }
 }
+
+exports.getAnAccessory = async(req, res) =>{
+    try {
+        const accessory = await Accessory.findOne( {name: req.params.name} );
+        if(!accessory){
+            res.status(404).json({message: 'Accessoire non trouvé'});
+            return;
+        }
+        res.status(200).json(accessory);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
+    }
+}
