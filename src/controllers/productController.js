@@ -1,6 +1,8 @@
 const Product = require('../models/productModel');
 const Accessory = require('../models/accessoryModel');
 
+const axios = require('axios');
+
 exports.createAProduct = async(res, req) =>{
     try {
         const {name, attributes, price} = req.body;
@@ -38,15 +40,32 @@ exports.createAProduct = async(res, req) =>{
             attributes,
             price
         });
+
         try {
             await newProduct.save();
-            res.status(201).json({message: "Produit créé avec succès"});
         } catch (error) {
             res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
         }
 
-        
+        try {
+            const description = attributes
+                .map(attribute => `${attribute.name}: ${attribute.options}`)
+                .join(', ');
 
+            const formData = {
+                name: name,
+                price: price,
+                description: description,
+                stock_quantity: 1
+            }
+            const response = await axios.post('https://api-retrometroid.devprod.fr/wp-json/wc/v3/products', formData);
+            console.log(response.data);
+
+            res.status(201).json({ID : response.data.id});
+        } catch (error) {
+            res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
+        }
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
