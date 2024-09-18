@@ -4,7 +4,7 @@ const options = {
     definition: {
         openapi: "3.1.0",
         info: {
-            title: "apiSecretSanta",
+            title: "workshop client",
             version: "0.1.0",
             description:
                 "This is a simple CRUD API application made with Express and documented with Swagger",
@@ -19,7 +19,7 @@ const options = {
         },  
         servers: [
             {
-                url: "http://localhost:3000",
+                url: "http://localhost:3030",
             },
         ],
     },
