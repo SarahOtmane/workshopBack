@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const instance = axios.create({
     baseURL: 'https://api-retrometroid.devprod.fr/wp-json/wc/v3/products'
