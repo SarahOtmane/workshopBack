@@ -1,7 +1,6 @@
 const Product = require('../models/productModel');
 const Accessory = require('../models/accessoryModel');
-
-const axios = require('axios');
+const axiosInstance = require('../services/axiosConfig');
 
 exports.createAProduct = async(req, res) =>{
     try {
@@ -55,7 +54,7 @@ exports.createAProduct = async(req, res) =>{
             stock_quantity: 1
         }
 
-        const response = await axios.post('https://api-retrometroid.devprod.fr/wp-json/wc/v3/products', formData);
+        const response = await axiosInstance.post('/', formData);
         console.log(response.data);
         res.status(201).json({ID : response.data.id});
         
