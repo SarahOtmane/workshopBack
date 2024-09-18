@@ -4,14 +4,23 @@ const Accessory = require('../models/accessoryModel');
 
 exports.createAnAccessory = async(req, res) =>{
     try {
-        const accessory = await Accessory.findOne({name: req.body.name});
+        const {name, options, price} = req.body;
+        if(!name && !options && !price){
+            res.status(403).json({message: "L'un des champs est vide !"});
+            return
+        }
 
+        const accessory = await Accessory.findOne({name: name});
         if(accessory){
             res.status(403).json({message: "Vous avez déja créer cet accessoire !"});
             return;
         }
-        
-        const newAccessory = new Accessory(req.body);
+
+        const newAccessory = new Accessory({
+            name: name,
+            options: options,
+            prie : price
+        });
         try {
             await newAccessory.save();
             res.status(201).json({message: "Accessoire créé avec succès"});
