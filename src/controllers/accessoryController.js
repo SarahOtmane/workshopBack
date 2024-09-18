@@ -33,3 +33,18 @@ exports.createAnAccessory = async(req, res) =>{
         res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
     }
 }
+
+
+exports.getAllAccessory = async(req, res) =>{
+    try {
+        const accessories = await Accessory.find();
+        if(!accessories){
+            res.status(404).json({message: 'Acce'});
+            return;
+        }
+        res.status(200).json(accessories);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
+    }
+}
