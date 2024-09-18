@@ -11,14 +11,19 @@ mongoose.connect(`mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@db
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
-    console.log('Connected to MongoDB');
+    console.log(`Connected to MongoDB ${process.env.DB_NAME}`);
 }).catch(err => {
     console.error('MongoDB connection error:', err);
 });
 
-
 app.use(express.urlencoded());
 app.use(express.json());
+
+const userRoute = require('./routes/userRoute.js');
+const accessoryRoute = require('./routes/accessoryRoute.js');
+
+userRoute(app);
+accessoryRoute(app);
 
 app.listen(port, () =>{
     console.log(`Example app listenning on port ${port}`);
