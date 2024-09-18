@@ -17,23 +17,23 @@ exports.createAProduct = async(req, res) =>{
             return
         }
 
-        //recup chaque attribut et verifier sil existe dans la bdd avec son option
-        // for (let index = 0; index < attributes.length; index++) {
-        //     const attribut = attributes[index];
-        //     const accessory = await Accessory.findOne({name: attribut.name});
+        // recup chaque attribut et verifier sil existe dans la bdd avec son option
+        for (let index = 0; index < attributes.length; index++) {
+            const attribut = attributes[index];
+            const accessory = await Accessory.findOne({name: attribut.name});
 
-        //     //vérifier que l accessoire existe
-        //     if(!accessory){
-        //         res.status(403).json({message: `L'accessoire ${attribut.name} n'existe pas`});
-        //         return
-        //     }
+            //vérifier que l accessoire existe
+            if(!accessory){
+                res.status(403).json({message: `L'accessoire ${attribut.name} n'existe pas`});
+                return
+            }
 
-        //     //verifier que l option existe
-        //     if(!accessory.options.includes[attribut.option]){
-        //         res.status(403).json({message: `L'option ${attribut.option} n'existe pas pour cet accessoire`});
-        //         return
-        //     }
-        // }
+            //verifier que l option existe
+            if(!accessory.options.includes[attribut.option]){
+                res.status(403).json({message: `L'option ${attribut.option} n'existe pas pour cet accessoire`});
+                return
+            }
+        }
 
         const newProduct = new Product({
             name,
@@ -46,6 +46,8 @@ exports.createAProduct = async(req, res) =>{
         } catch (error) {
             res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
         }
+
+        console.log('AAAAAAAA', newProduct);
 
         try {
             const description = attributes
