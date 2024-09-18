@@ -1,6 +1,7 @@
 const Product = require('../models/productModel');
 const Accessory = require('../models/accessoryModel');
-const axiosInstance = require('../services/axiosConfig');
+require('dotenv').config();
+const axios = require('axios');
 
 exports.createAProduct = async(req, res) =>{
     try {
@@ -19,22 +20,22 @@ exports.createAProduct = async(req, res) =>{
 
 
         // recup chaque attribut et verifier sil existe dans la bdd avec son option
-        // for (const attribut of attributes) {
-        //     console.log(attribut);
-        //     const accessory = await Accessory.findOne({name: attribut.name});
+        for (const attribut of attributes) {
+            console.log(attribut);
+            const accessory = await Accessory.findOne({name: attribut.name});
 
-        //     //vérifier que l accessoire existe
-        //     if(!accessory){
-        //         res.status(403).json({message: `L'accessoire ${attribut.name} n'existe pas`});
-        //         return
-        //     }
+            //vérifier que l accessoire existe
+            if(!accessory){
+                res.status(403).json({message: `L'accessoire ${attribut.name} n'existe pas`});
+                return
+            }
 
-        //     //verifier que l option existe
-        //     if(!accessory.options.includes[attribut.option]){
-        //         res.status(403).json({message: `L'option ${attribut.option} n'existe pas pour cet accessoire`});
-        //         return
-        //     }
-        // }
+            //verifier que l option existe
+            if (!accessory.options.includes(attribut.option)) {
+                res.status(403).json({ message: `L'option ${attribut.option} n'existe pas pour cet accessoire` });
+                return;
+            }
+        }
 
         const newProduct = new Product({
             name,
@@ -54,7 +55,12 @@ exports.createAProduct = async(req, res) =>{
             stock_quantity: 1
         }
 
-        const response = await axiosInstance.post('/', formData);
+        const response = await axios.post('https://api-retrometroid.devprod.fr/wp-json/wc/v3/products', formData, {
+            auth: {
+                username: process.env.API_KEY,
+                password: process.env.API_SECRET
+            }
+        });
         console.log(response.data);
         res.status(201).json({ID : response.data.id});
         
