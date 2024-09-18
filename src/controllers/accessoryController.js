@@ -10,9 +10,14 @@ exports.createAnAccessory = async(req, res) =>{
             res.status(403).json({message: "Vous avez déja créer cet accessoire !"});
             return;
         }
-
+        
         const newAccessory = new Accessory(req.body);
-        res.status(201).json({newAccessory});
+        try {
+            await newAccessory.save();
+            res.status(201).json({message: "Accessoire créé avec succès"});
+        } catch (error) {
+            res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
+        }
 
     } catch (error) {
         console.log(error);
