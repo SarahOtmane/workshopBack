@@ -2,7 +2,7 @@
 module.exports = (server) => {
     const accessoryController = require('../controllers/accessoryController');
 
-    server.post('/accessory', accessoryController.createAnAccessory);
-    server.get('/accessory', accessoryController.getAccessories);
-    server.get('/accessory/:name', accessoryController.getAnAccessory);
+    server.post('/accessories', accessoryController.createAnAccessory);
+    server.get('/accessories', accessoryController.getAccessories);
+    server.get('/accessories/:name', accessoryController.getAnAccessory);
 }
