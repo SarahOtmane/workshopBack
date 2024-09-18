@@ -17,9 +17,9 @@ exports.createAnAccessory = async(req, res) =>{
         }
 
         const newAccessory = new Accessory({
-            name: name,
-            options: options,
-            price : price
+            name,
+            options,
+            price
         });
         
         await newAccessory.save();
