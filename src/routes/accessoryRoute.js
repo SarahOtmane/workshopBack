@@ -4,4 +4,5 @@ module.exports = (server) => {
 
     server.post('/accessory', accessoryController.createAnAccessory);
     server.get('/accessory', accessoryController.getAccessories);
+    server.get('/accessory/:name', accessoryController.getAnAccessory);
 }
