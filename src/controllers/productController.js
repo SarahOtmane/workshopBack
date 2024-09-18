@@ -45,6 +45,8 @@ exports.createAProduct = async(res, req) =>{
             res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
         }
 
+        
+
     } catch (error) {
         console.log(error);
         res.status(500).json({message: 'Une erreur s\'est produite lors du traitement'});
