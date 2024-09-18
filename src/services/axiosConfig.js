@@ -14,9 +14,11 @@ instance.interceptors.request.use(config => {
     // if (token) {
     //     config.headers['Authorization'] = `Bearer ${token}`;
     // }
-    
+
     config.auth = auth;
     return config;
 }, error => {
     return Promise.reject(error);
 });
+
+module.exports = instance; 
