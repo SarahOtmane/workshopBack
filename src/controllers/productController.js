@@ -21,7 +21,6 @@ exports.createAProduct = async(req, res) =>{
 
         // recup chaque attribut et verifier sil existe dans la bdd avec son option
         for (const attribut of attributes) {
-            console.log(attribut);
             const accessory = await Accessory.findOne({name: attribut.name});
 
             //vérifier que l accessoire existe
