@@ -7,7 +7,7 @@ let productSchema = new Schema({
         required : true,
         unique : true,
     },
-    options:{
+    attributes:{
         type : Array,
         required : true
     },
