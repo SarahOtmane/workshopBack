@@ -36,7 +36,7 @@ exports.getAllAccessory = async(req, res) =>{
     try {
         const accessories = await Accessory.find();
         if(!accessories){
-            res.status(404).json({message: 'Acce'});
+            res.status(404).json({message: 'Auncun accessoire créé'});
             return;
         }
         res.status(200).json(accessories);
