@@ -10,7 +10,7 @@ const connectDB = require('./services/connectDB.js');
 connectDB();
 
 // Configure routes and middleware
-const configureServices = require('./service-config.js');
+const configureServices = require('./services/service.js');
 configureServices(app);
 
 // Start the server
