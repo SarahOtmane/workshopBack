@@ -1,15 +1,21 @@
-const express = require('express')
-const app = express()  
-const port = 3000;
+const express = require('express');
+const app = express();
+const port = 3030;
 
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./doc/swagger-config.js');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// Load environment variables
+require('dotenv').config();
 
+// Import and connect to the database
+const connectDB = require('./services/connectDB.js');
+connectDB();
 
-app.use(express.urlencoded());
-app.use(express.json());
+// Configure routes and middleware
+const configureServices = require('./services/service.js');
+configureServices(app);
 
-app.listen(port, () =>{
-    console.log(`Example app listenning on port ${port}`);
-})
+// Start the server
+const server = app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
+module.exports = { app, server };
