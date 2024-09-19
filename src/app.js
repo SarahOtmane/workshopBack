@@ -14,9 +14,8 @@ const configureServices = require('./services/service.js');
 configureServices(app);
 
 // Start the server
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+const server = app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
 
-
-module.exports = app;
+module.exports = { app, server };
