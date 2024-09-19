@@ -7,9 +7,8 @@ This is a simple CRUD API application for managing products and accessories. Bui
 - [Features](#features)
 - [Technologies](#technologies)
 - [Installation](#installation)
-- [Running the App](#running-the-app)
-- [API Documentation](#api-documentation)
-- [Routes](#routes)
+- [Environment Variables](#environnment)
+- [Docker Setup](#docker)
 - [Testing](#testing)
 - [License](#license)
 
