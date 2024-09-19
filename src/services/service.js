@@ -4,6 +4,7 @@ const swaggerSpec = require('../doc/swagger-config.js');
 const userRoute = require('../routes/userRoute.js');
 const accessoryRoute = require('../routes/accessoryRoute.js');
 const productController = require('../routes/productRoute.js');
+const cors = require('cors');
 
 const configureServices = (app) => {
     // Swagger documentation route
@@ -12,6 +13,14 @@ const configureServices = (app) => {
     // Middleware for parsing requests
     app.use(express.urlencoded({ extended: true }));
     app.use(express.json());
+
+    // Autoriser uniquement http://localhost:3000
+    app.use(cors({
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentials: true // Si tu utilises des cookies pour l'authentification
+    }));
+    app.options('*', cors());
 
     // Define application routes
     userRoute(app);
