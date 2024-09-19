@@ -8,6 +8,11 @@
 /**
  * @swagger
  * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  *   schemas:
  *     Accessory:
  *       type: object
@@ -60,7 +65,6 @@
  *         description: Internal server error
  */
 
-
 /**
  * @swagger
  * /accessories:
@@ -81,7 +85,6 @@
  *       500:
  *         description: Internal server error
  */
-
 
 /**
  * @swagger
@@ -107,15 +110,4 @@
  *         description: Accessory not found
  *       500:
  *         description: Internal server error
- */
-
-
-/**
- * @swagger
- * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
  */
