@@ -25,8 +25,6 @@ describe('POST /accessories', () => {
             });
 
             token = response.body.token;
-
-            console.log(token);
     });
     beforeEach(async () => { await Accessory.deleteMany({}) });
     afterAll(async () => { 
