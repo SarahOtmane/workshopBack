@@ -5,7 +5,7 @@ const Accessory = require('../models/accessoryModel');
 exports.createAnAccessory = async(req, res) =>{
     try {
         const {name, options, price} = req.body;
-        if(!name && !options && !price){
+        if(!name || !options || !price){
             res.status(403).json({message: "L'un des champs est vide !"});
             return
         }
