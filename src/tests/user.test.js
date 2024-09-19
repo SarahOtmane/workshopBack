@@ -6,6 +6,8 @@ const app = require('../app');
 const User = require('../models/userModel');
 const connectDB = require('../services/connectDB');
 
+//docker compose run node npm test
+
 describe('POST /users/login', () => {
 
     beforeAll(async () => { await connectDB(); });
@@ -27,9 +29,10 @@ describe('POST /users/login', () => {
     });
 
     it('should return 401 if the password is not correct', async () => {
+        const hashedPassword = await argon2.hash('test');
         await User.create({
             email: 'test@gmail.com',
-            password: await argon2.hash('test'),
+            password: hashedPassword,
         });
 
         const response = await supertest(app)
@@ -44,9 +47,10 @@ describe('POST /users/login', () => {
     });
 
     it('should return 201 if the user is logged', async () => {
+        const hashedPassword = await argon2.hash('test');
         await User.create({
             email: 'test@gmail.com',
-            password: await argon2.hash('test'),
+            password: hashedPassword,
         });
 
         const response = await supertest(app)
