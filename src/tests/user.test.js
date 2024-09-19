@@ -2,7 +2,7 @@ const supertest = require('supertest');
 const mongoose = require('mongoose');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-const app = require('../app'); 
+const { app, server } = require('../app'); 
 const User = require('../models/userModel');
 const connectDB = require('../services/connectDB');
 
@@ -12,7 +12,10 @@ describe('POST /users/login', () => {
 
     beforeAll(async () => { await connectDB(); });
 
-    afterAll(async () => { await mongoose.disconnect(); });
+    afterAll(async () => { 
+        await mongoose.disconnect(); 
+        server.close();
+    });
 
     beforeEach(async () => { await User.deleteMany({}); });
 
