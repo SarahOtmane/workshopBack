@@ -10,7 +10,7 @@
  * @swagger
  * components:
  *   schemas:
- *     Person:
+ *     User:
  *       type: object
  *       required:
  *         - email
