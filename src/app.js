@@ -6,7 +6,7 @@ const port = 3030;
 require('dotenv').config();
 
 // Import and connect to the database
-const connectDB = require('./db.js');
+const connectDB = require('./services/connectDB.js');
 connectDB();
 
 // Configure routes and middleware
