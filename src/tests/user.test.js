@@ -4,12 +4,11 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const app = require('../app'); 
 const User = require('../models/userModel');
+const connectDB = require('../services/connectDB');
 
 describe('POST /users/login', () => {
 
-    beforeAll(async () => {
-        await mongoose.connect(process.env.TEST_DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-    });
+    beforeAll(async () => { await connectDB(); });
 
     afterAll(async () => { await mongoose.disconnect(); });
 
