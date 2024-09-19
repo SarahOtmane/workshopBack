@@ -35,7 +35,7 @@ exports.loginAUser = async(req, res) =>{
             res.status(404).json({message: "Email ou password incorrect"});
             return;
         }else{
-            const passwordMatch = await argon2.verify(req.body.password, user.password);
+            const passwordMatch = await argon2.verify(user.password, req.body.password);
 
             if(user.email == req.body.email && passwordMatch){
                 const userData = {
