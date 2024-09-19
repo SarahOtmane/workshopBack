@@ -40,3 +40,30 @@ services:
       - "8081:8081"
     depends_on:
       - db
+
+  dbTest:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: ${DB_NAME_TEST}
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USER_TEST}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD_TEST}
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./dbTest:/data/db
+
+  mongo-expressTest:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER_TEST}
+      ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD_TEST}
+      ME_CONFIG_MONGODB_SERVER: dbTest
+      ME_CONFIG_MONGODB_PORT: ${DB_PORT}
+    ports:
+      - "8082:8082"
+    depends_on:
+      - dbTest
