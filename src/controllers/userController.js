@@ -81,10 +81,11 @@ exports.registerAUser = async(req, res) =>{
         const hashedPassword = await argon2.hash(password);
 
         // Création de l'utilisateur
-        await User.create({
-            email,
+        const newUser = new User({
+            email: email,
             password: hashedPassword,
         });
+        await newUser.save();
 
         res.status(201).json({ message: `Utilisateur créé avec succès.`});
     } 
