@@ -4,7 +4,7 @@ const swaggerSpec = require('../doc/swagger-config.js');
 const userRoute = require('../routes/userRoute.js');
 const accessoryRoute = require('../routes/accessoryRoute.js');
 const productRoute = require('../routes/productRoute.js');
-const consoleRoute = require('../routes/productRoute.js');
+const consoleRoute = require('../routes/consoleRoute.js');
 const cors = require('cors');
 
 const configureServices = (app) => {
