@@ -49,20 +49,20 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER_TEST}
       MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD_TEST}
     ports:
-      - "27017:27017"
+      - "27018:27018"
     volumes:
       - ./dbTest:/data/db
 
   mongo-expressTest:
     image: mongo-express:latest
-    container_name: mongo-express
+    container_name: mongo-expressTest
     environment:
       ME_CONFIG_BASICAUTH_USERNAME: admin
       ME_CONFIG_BASICAUTH_PASSWORD: admin
       ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_USER_TEST}
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_PASSWORD_TEST}
       ME_CONFIG_MONGODB_SERVER: dbTest
-      ME_CONFIG_MONGODB_PORT: ${DB_PORT}
+      ME_CONFIG_MONGODB_PORT: 27018
     ports:
       - "8082:8082"
     depends_on:
