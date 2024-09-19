@@ -15,6 +15,10 @@ let accessorySchema = new Schema({
         type : Number,
         required : true
     },
+    facultatif:{
+        type : Boolean,
+        required : true
+    }
 });
 
 module.exports = mongoose.model('Accessory', accessorySchema);
