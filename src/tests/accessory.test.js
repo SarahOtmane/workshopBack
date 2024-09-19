@@ -145,23 +145,32 @@ describe('Accessory controller', () => {
                 .get('/accessories')
     
             expect(response.statusCode).toBe(200);
-            expect(response.body.message).toBe([{
+        });
+
+    });
+
+    describe('GET /accessories/:name', () => {
+        beforeEach(async () => { await Accessory.deleteMany({}) });
+        
+        it('should return 404 if no accessory found', async() => {
+            const response = await supertest(app)
+                .get('/accessories/test')
+    
+            expect(response.statusCode).toBe(404);
+            expect(response.body.message).toBe("Accessoire non trouvé");
+        });
+        
+        it('should return 200 if the accessory are found', async() => {
+            await Accessory.create({
                 name: 'Coque',
                 price: 245,
                 options: ['bleue', 'noir'],
-            },{
-                name: 'Lanières',
-                price: 5,
-                options: ['vert', 'rouge'],
-            }][{
-                name: 'Coque',
-                price: 245,
-                options: ['bleue', 'noir'],
-            },{
-                name: 'Lanières',
-                price: 5,
-                options: ['vert', 'rouge'],
-            }]);
+            })
+
+            const response = await supertest(app)
+                .get('/accessories/Coque')
+    
+            expect(response.statusCode).toBe(200);
         });
 
     });
