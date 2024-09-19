@@ -3,7 +3,8 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('../doc/swagger-config.js');
 const userRoute = require('../routes/userRoute.js');
 const accessoryRoute = require('../routes/accessoryRoute.js');
-const productController = require('../routes/productRoute.js');
+const productRoute = require('../routes/productRoute.js');
+const consoleRoute = require('../routes/productRoute.js');
 const cors = require('cors');
 
 const configureServices = (app) => {
@@ -25,7 +26,8 @@ const configureServices = (app) => {
     // Define application routes
     userRoute(app);
     accessoryRoute(app);
-    productController(app);
+    productRoute(app);
+    consoleRoute(app);
 };
 
 module.exports = configureServices;
