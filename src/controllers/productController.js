@@ -49,9 +49,10 @@ exports.createAProduct = async(req, res) =>{
 
         const formData = {
             name: name,
-            price: price,
+            regular_price: price,
             description: description,
-            stock_quantity: 1
+            stock_quantity: 1,
+            manage_stock: true
         }
 
         const response = await axios.post('https://api-retrometroid.devprod.fr/wp-json/wc/v3/products', formData, {
