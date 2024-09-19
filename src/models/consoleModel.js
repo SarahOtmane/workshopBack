@@ -13,4 +13,4 @@ let consoleModel = new Schema({
     },
 });
 
-module.exports = mongoose.model('Accessory', consoleModel);
+module.exports = mongoose.model('Console', consoleModel);
