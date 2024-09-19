@@ -35,7 +35,7 @@ exports.createAnAccessory = async(req, res) =>{
 exports.getAllAccessory = async(req, res) =>{
     try {
         const accessories = await Accessory.find();
-        if(!accessories){
+        if(accessories.length === 0){
             res.status(404).json({message: 'Auncun accessoire créé'});
             return;
         }
