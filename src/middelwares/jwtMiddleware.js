@@ -4,6 +4,7 @@ require('dotenv').config();
 exports.verifyToken = async(req, res, next) =>{
     try {
         let token = req.headers['authorization'];
+        token = token.replace(/^Bearer\s+/, '');
         if(token != undefined){
             
             const payload = await new Promise((resolve, reject) =>{
