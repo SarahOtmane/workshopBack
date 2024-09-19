@@ -9,7 +9,7 @@
  * @swagger
  * components:
  *   schemas:
- *     Person:
+ *     Product:
  *       type: object
  *       required:
  *         - name
@@ -18,15 +18,16 @@
  *       properties:
  *         name:
  *           type: string
- *           description: the name of the product
+ *           description: The name of the product
  *         attributes:
  *           type: array
- *           description: array with all the attributes of the product
+ *           items:
+ *             type: object
+ *           description: Array with all the attributes of the product
  *         price:
  *           type: number
- *           description: the price of the product
+ *           description: The price of the product
  */
-
 
 /**
  * @swagger
@@ -39,22 +40,20 @@
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *             required:
- *               - email
- *               - password
+ *             $ref: '#/components/schemas/Product'
  *     responses:
- *       200:
- *         description: Person logged in successfully
- *       401:
- *         description: Incorrect email or password
- *       404:
- *         description: Person not found
+ *       201:
+ *         description: Product created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: ID of the created product
+ *       403:
+ *         description: One of the fields is empty or product already exists
  *       500:
  *         description: Internal server error
  */
