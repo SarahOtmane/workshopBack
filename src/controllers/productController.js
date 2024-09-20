@@ -20,21 +20,21 @@ exports.createAProduct = async(req, res) =>{
 
 
         // recup chaque attribut et verifier sil existe dans la bdd avec son option
-        for (const attribut of attributes) {
-            const accessory = await Accessory.findOne({name: attribut.name});
+        // for (const attribut of attributes) {
+        //     const accessory = await Accessory.findOne({name: attribut.name});
 
-            //vérifier que l accessoire existe
-            if(!accessory){
-                res.status(403).json({message: `L'accessoire ${attribut.name} n'existe pas`});
-                return
-            }
+        //     //vérifier que l accessoire existe
+        //     if(!accessory){
+        //         res.status(403).json({message: `L'accessoire ${attribut.name} n'existe pas`});
+        //         return
+        //     }
 
-            //verifier que l option existe
-            if (!accessory.options.includes(attribut.option)) {
-                res.status(403).json({ message: `L'option ${attribut.option} n'existe pas pour cet accessoire` });
-                return;
-            }
-        }
+        //     //verifier que l option existe
+        //     if (!accessory.options.includes(attribut.option)) {
+        //         res.status(403).json({ message: `L'option ${attribut.option} n'existe pas pour cet accessoire` });
+        //         return;
+        //     }
+        // }
 
         const newProduct = new Product({
             name,
@@ -43,16 +43,21 @@ exports.createAProduct = async(req, res) =>{
         });
         await newProduct.save();
 
+
         const description = attributes
-            .map(attribute => `${attribute.name}: ${attribute.options}`)
-            .join(', ');
+            .map(attribute => {
+                return Object.entries(attribute)
+                        .map(([key, value]) => `${key}: ${value}`)
+                        .join(', ');
+                })
+            .join(';');
 
         const formData = {
             name: name,
-            regular_price: price,
+            regular_price: toString(price),
             description: description,
             stock_quantity: 1,
-            manage_stock: true
+            manage_stock: true,
         }
 
         const response = await axios.post('https://api-retrometroid.devprod.fr/wp-json/wc/v3/products', formData, {
